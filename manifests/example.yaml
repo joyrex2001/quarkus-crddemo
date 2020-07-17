@@ -1,0 +1,15 @@
+apiVersion: crddemo.joyrex2001.com/v1
+kind: Broadcast
+metadata:
+    name: "hello"
+spec:
+    message: "Hello world!"
+    color: "red"
+---
+apiVersion: crddemo.joyrex2001.com/v1
+kind: Broadcast
+metadata:
+    name: "whatsup"
+spec:
+    message: "How are you?"
+    color: "blue"

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Custom Resources Demo</title>
+
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <style>
+            body {
+                font-family: 'Roboto', sans-serif;
+            }
+            .header {
+                background-color: seagreen;
+                color:white; 
+            }
+        </style>
+    </head>
+
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <div class="header">
+            <h1>Custom Resources Demo</h1>
+        </div>
+
+        <div id="messages">
+            <ul style="list-style: none;" class="list"></ul>
+        </div>
+
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://" + location.host + "/broadcast");
+            socket.onopen = function() {
+                console.log("Connected to the web socket");
+            };
+            socket.onmessage =function(m) {
+                $('#messages .list li').remove();
+                JSON.parse(m.data).forEach(m => {
+                    $('#messages .list').append('<li><span style="color:'+m.color+'">'+m.message+'</span></li>')
+                })
+            }
+        </script>
+
+    </body>
+</html>
